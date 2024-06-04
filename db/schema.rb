@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_04_142809) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_04_143612) do
+  create_table "calendar_entries", force: :cascade do |t|
+    t.integer "villa_id", null: false
+    t.date "date"
+    t.decimal "price"
+    t.boolean "available"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["villa_id"], name: "index_calendar_entries_on_villa_id"
+  end
+
   create_table "villas", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -19,4 +29,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_04_142809) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "calendar_entries", "villas"
 end
